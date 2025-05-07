@@ -30,14 +30,7 @@ const SystemMap = () => {
             <CausalLoopAnimation />
           </div>
           
-          <div className="mt-6 flex justify-center">
-            <button className="btn-outline flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd"></path>
-              </svg>
-              Download Vensim Model (.mdl file)
-            </button>
-          </div>
+          {/* Removed download button div */}
         </div>
 
         <div className={`${inView ? 'animate-fade-in' : 'opacity-0'}`} style={{animationDelay: "0.4s"}}>

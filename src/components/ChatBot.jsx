@@ -14,7 +14,8 @@ const ChatBot = () => {
   const inputRef = useRef(null);
   
   const API_KEY = 'AIzaSyD2ioc4jyATDdFDIezIQKTXU5tB2w1v5GM';
-  const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+  // Update to use the gemini-2.0-flash model for better speed/reliability
+  const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
   // Scroll to bottom of chat when new messages arrive
   useEffect(() => {
@@ -48,24 +49,20 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      // Context for the AI to understand what it should respond about
-      const systemContext = "You are a helpful assistant for a website about quick commerce (10-minute delivery) systems. Your purpose is to explain the impacts, challenges, and sustainability aspects of ultra-fast delivery services. Use concise language and refer to concepts from systems thinking when appropriate.";
-      
-      // Prepare the API request
+      // Simplified request format matching the official API structure
       const requestBody = {
         contents: [
-          { role: "user", parts: [{ text: systemContext }] },
-          ...messages.map(msg => ({
-            role: msg.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: msg.content }]
-          })),
-          { role: "user", parts: [{ text: userInput }] }
-        ],
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 800,
-        }
+          {
+            parts: [
+              { 
+                text: "You are a helpful assistant for a website about quick commerce (10-minute delivery) systems. Answer this question about quick commerce: " + userInput 
+              }
+            ]
+          }
+        ]
       };
+
+      console.log("Sending request to Gemini API:", requestBody);
 
       // Make API call to Gemini
       const response = await fetch(`${API_URL}?key=${API_KEY}`, {
@@ -77,6 +74,7 @@ const ChatBot = () => {
       });
 
       const data = await response.json();
+      console.log("Gemini API response:", data);
       
       // Handle API response
       if (response.ok && data.candidates && data.candidates[0].content) {
@@ -86,19 +84,22 @@ const ChatBot = () => {
         };
         setMessages(prev => [...prev, botResponse]);
       } else {
-        // Handle API error
+        // Handle API error with more detailed logging
+        console.error('API Error Response:', data);
+        console.error('Status code:', response.status);
+        
         const errorMessage = {
           role: 'assistant',
-          content: "I'm having trouble connecting to my knowledge base right now. Please try again in a moment."
+          content: "I'm having trouble connecting to my knowledge base right now. Please try again in a moment. Error: " + 
+                   (data.error?.message || "Unknown error")
         };
         setMessages(prev => [...prev, errorMessage]);
-        console.error('API Error:', data);
       }
     } catch (error) {
       console.error('Error communicating with Gemini API:', error);
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "Sorry, I encountered an error. Please try again later."
+        content: "Sorry, I encountered an error: " + error.message
       }]);
     } finally {
       setIsLoading(false);

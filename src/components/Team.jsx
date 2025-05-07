@@ -161,31 +161,31 @@ const teamMembers = [
     name: "Agnik Misra",
     role: "",
     avatar: "👨‍💻",
-    bio: "Specialist in systems modeling and causal loop diagrams with a background in environmental systems analysis."
+    bio: "Made the website to showcase our findings and system analysis."
   },
   {
     name: "Kartikey Gupta",
     role: "",
     avatar: "👨‍🔬",
-    bio: "Focused on data collection and research synthesis, with expertise in consumer behavior trends."
+    bio: "Worked on the report development and documentation."
   },
   {
     name: "Kavya Jain",
     role: "",
     avatar: "👨‍🏫",
-    bio: "Managed our quantitative analysis and helped design the dashboard visualizations."
+    bio: "Created the Causal Loop Diagram (CLD) visualizing key system dynamics."
   },
   {
     name: "Anshika Seth",
     role: "",
     avatar: "👩‍💻",
-    bio: "Created this interactive website to showcase our findings and system analysis."
+    bio: "brainstorming sessions for our systems thinking approach."
   },
   {
     name: "Abhijeet",
     role: "",
     avatar: "👨‍🎨",
-    bio: "Designed the user interface and experience to make our complex system analysis accessible and engaging."
+    bio: "Worked on the report preparation and documentation."
   }
 ];
 
