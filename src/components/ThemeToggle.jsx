@@ -1,4 +1,4 @@
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../src/context/ThemeContext';
 import { useState } from 'react';
 
 const ThemeToggle = () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
 // Removed ThemeToggle import
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../src/context/ThemeContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
