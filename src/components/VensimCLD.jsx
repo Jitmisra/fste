@@ -29,7 +29,7 @@ const VensimCLD = () => {
           <div className={`md:w-1/2 ${inView ? 'animate-fade-in' : 'opacity-0'}`} style={{animationDelay: "0.1s"}}>
             <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
               <img 
-                src="public/assets/cld.jpeg" 
+                src="/assets/cld.jpeg" 
                 alt="Vensim Causal Loop Diagram" 
                 className="w-full h-auto rounded shadow-md hover:shadow-lg transition-shadow duration-300"
               />

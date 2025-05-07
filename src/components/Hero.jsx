@@ -79,7 +79,7 @@ const Hero = () => {
             <div className="card p-6 shadow-lg transform transition-all duration-500 hover:shadow-xl">
               <div className="w-full h-64 rounded-lg mb-4 overflow-hidden">
                 <img 
-                  src="public/assets/heroname.png" 
+                  src="/assets/heroname.png" 
                   alt="Quick Commerce Delivery" 
                   className="w-full h-full object-cover"
                 />
