@@ -108,69 +108,109 @@ const ChatBot = () => {
 
   return (
     <>
-      {/* Chat button */}
+      {/* Modern floating chat button with pulse effect */}
       <button
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
-          isOpen ? 'bg-red-500 rotate-45' : 'bg-primary hover:bg-primary-dark'
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-500 ${
+          isOpen ? 'bg-red-500 rotate-45 scale-110' : 'bg-gradient-to-r from-primary to-primary-dark hover:shadow-xl'
         }`}
         onClick={toggleChat}
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
+        {/* Pulse animation ring when closed */}
+        {!isOpen && (
+          <span className="absolute w-full h-full rounded-full animate-ping bg-primary/30"></span>
+        )}
+        
         {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
           </svg>
         )}
       </button>
 
-      {/* Chat window */}
+      {/* Enhanced chat window with glassmorphism effect */}
       <div
-        className={`fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-xl shadow-2xl z-50 overflow-hidden transition-all duration-500 transform ${
-          isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'
+        className={`fixed bottom-24 right-6 w-80 md:w-96 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl z-50 overflow-hidden transition-all duration-500 transform border border-gray-200/50 ${
+          isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-10 opacity-0 scale-95 pointer-events-none'
         }`}
       >
-        {/* Chat header */}
-        <div className="bg-primary text-white px-4 py-3 flex items-center justify-between">
+        {/* Chat header with gradient */}
+        <div className="bg-gradient-to-r from-primary to-secondary text-white px-5 py-4 flex items-center justify-between rounded-t-2xl">
           <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3">
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3 shadow-inner">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
               </svg>
             </div>
-            <h3 className="font-semibold">Gemini Q-Commerce Assistant</h3>
+            <div>
+              <h3 className="font-bold text-lg">Gemini Assistant</h3>
+              <p className="text-xs text-white/75">Q-Commerce Expert</p>
+            </div>
           </div>
-          <span className="px-2 py-1 text-xs bg-white/20 rounded-full">AI Powered</span>
+          <span className="px-3 py-1 text-xs bg-white/20 rounded-full font-medium flex items-center">
+            <span className="w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></span>
+            AI Powered
+          </span>
         </div>
         
-        {/* Messages container */}
-        <div className="h-96 overflow-y-auto p-4 bg-gray-50">
+        {/* Messages container with improved styling */}
+        <div className="h-96 overflow-y-auto p-5 bg-gray-50/50 backdrop-blur-sm">
           {messages.map((message, index) => (
             <div 
               key={index} 
-              className={`mb-4 flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              className={`mb-5 flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
+              style={{animationDelay: `${index * 0.1}s`}}
             >
+              {/* Avatar for assistant */}
+              {message.role === 'assistant' && (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex-shrink-0 flex items-center justify-center mr-2 shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  </svg>
+                </div>
+              )}
+              
               <div 
-                className={`max-w-[80%] rounded-lg p-3 ${
+                className={`max-w-[75%] rounded-xl p-3.5 shadow-sm ${
                   message.role === 'user' 
-                    ? 'bg-primary text-white rounded-tr-none' 
-                    : 'bg-white border border-gray-200 rounded-tl-none'
+                    ? 'bg-gradient-to-br from-primary to-primary-dark text-white rounded-tr-none' 
+                    : 'bg-white border border-gray-100 rounded-tl-none'
                 }`}
               >
-                <p className="text-sm">{message.content}</p>
+                <p className="text-sm leading-relaxed">{message.content}</p>
+                <div className={`text-xs mt-1 ${message.role === 'user' ? 'text-white/70' : 'text-gray-400'}`}>
+                  {new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                </div>
               </div>
+              
+              {/* Avatar for user */}
+              {message.role === 'user' && (
+                <div className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center ml-2 shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+              )}
             </div>
           ))}
+          
+          {/* Enhanced loading indicator */}
           {isLoading && (
-            <div className="flex justify-start mb-4">
-              <div className="bg-white border border-gray-200 rounded-lg rounded-tl-none p-3 max-w-[80%]">
-                <div className="flex space-x-2">
-                  <div className="w-2 h-2 rounded-full bg-gray-300 animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                  <div className="w-2 h-2 rounded-full bg-gray-300 animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                  <div className="w-2 h-2 rounded-full bg-gray-300 animate-bounce" style={{ animationDelay: '600ms' }}></div>
+            <div className="flex justify-start mb-4 animate-fade-in">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex-shrink-0 flex items-center justify-center mr-2 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-xl rounded-tl-none p-3 max-w-[75%] shadow-sm">
+                <div className="flex space-x-2 items-center">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '600ms' }}></div>
                 </div>
               </div>
             </div>
@@ -178,29 +218,34 @@ const ChatBot = () => {
           <div ref={messagesEndRef} />
         </div>
         
-        {/* Input area */}
-        <form onSubmit={handleSubmit} className="border-t border-gray-200 p-3 bg-white">
-          <div className="flex items-center">
+        {/* Modern input area with shadow and glow effect */}
+        <form onSubmit={handleSubmit} className="border-t border-gray-100 p-4 bg-white relative">
+          <div className="flex items-center bg-gray-50 rounded-full shadow-inner">
             <input
               ref={inputRef}
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Ask about quick commerce..."
-              className="flex-1 py-2 px-3 rounded-l-full border-l border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="flex-1 py-3 px-4 bg-transparent rounded-l-full focus:outline-none text-gray-700"
               disabled={isLoading}
             />
             <button
               type="submit"
-              className={`bg-primary text-white py-2 px-4 rounded-r-full border border-primary ${
-                isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-dark'
+              className={`bg-gradient-to-r from-primary to-secondary text-white p-3 rounded-full mr-1 shadow-md transition-all duration-300 ${
+                isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-lg hover:scale-105'
               }`}
               disabled={isLoading}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
             </button>
+          </div>
+          
+          {/* Footer message */}
+          <div className="text-center mt-3 text-xs text-gray-400">
+            Powered by Google Gemini · Ask me anything about quick commerce
           </div>
         </form>
       </div>

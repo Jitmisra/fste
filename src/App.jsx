@@ -7,6 +7,7 @@ import SystemMap from './components/SystemMap';
 import Analysis from './components/Analysis';
 import Solutions from './components/Solutions';
 import Team from './components/Team';
+import SourcesSection from './components/SourcesSection';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
 
@@ -56,6 +57,7 @@ function App() {
           <Analysis />
           <Solutions />
           <Team />
+          <SourcesSection />
           <Footer />
           <ChatBot />
         </div>

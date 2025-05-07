@@ -17,7 +17,8 @@ const Navbar = () => {
     { name: 'System Map', to: 'system-map', offset: -70 },
     { name: 'Analysis', to: 'analysis', offset: -70 },
     { name: 'Solutions', to: 'solutions', offset: -70 },
-    { name: 'Team', to: 'team', offset: -70 }
+    { name: 'Team', to: 'team', offset: -70 },
+    { name: 'Sources', to: 'sources', offset: -70 }
   ];
 
   // Handle scroll effects
